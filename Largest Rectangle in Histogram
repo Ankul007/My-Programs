@@ -1,0 +1,30 @@
+int largestRectangleArea(int* A, int n1) {
+    int curr=0;
+    int area=0;
+    int stack[n1];
+    int top=-1;
+    int i=0;
+    int tp;
+    while(i<n1)
+    {
+        if(top==-1||A[stack[top]]<=A[i])
+        stack[++top]=i++;
+        else{
+            tp=stack[top--];
+            curr=A[tp]*(top==-1?i:i-stack[top]-1);
+            if(area<curr)
+            area=curr;
+        }
+        
+    }
+        while (top!=-1)
+    {
+        tp = stack[top--];
+        curr = A[tp] * (top==-1 ? i : i - stack[top] - 1);
+ 
+        if (area < curr)
+            area = curr;
+    }
+    
+    return area;
+}
