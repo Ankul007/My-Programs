@@ -1,0 +1,19 @@
+int isValid(char* A) {
+    int len=strlen(A);
+    int i,top=-1;
+    char stack[len];
+    for(i=0;i<len;i++)
+    {
+        if(A[i]=='[' || A[i]=='{' || A[i]=='(')
+            stack[++top]=A[i];
+        else
+        {
+            if( top>=0 && ( (A[i]==']'&&stack[top]=='[') || (A[i]=='}' && stack[top]=='{') || (A[i]==')' && stack[top]=='(') ) )
+                top--;
+            else return 0;
+        }
+    }
+    if(top!=-1)
+    return 0;
+    return 1;
+}
