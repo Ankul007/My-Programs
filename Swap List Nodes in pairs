@@ -1,0 +1,27 @@
+listnode* swapPairs(listnode* A) {
+
+    if(A==NULL || A->next==NULL) return A;
+    listnode *T1=A;
+    listnode *T2=T1->next;
+    listnode *T3=T2->next;
+
+    listnode *H=T2;
+    T1->next=T3;
+    T2->next=T1;
+    listnode *_T1=T1;
+    while(T3!=NULL){
+
+		_T1=T1;
+		T1=T3;
+		T3=T3->next;
+		T2=T3;
+		if(T3==NULL) return H;
+		T3=T3->next;
+		T1->next=T3;
+        T2->next=T1;
+		_T1->next=T2;
+
+    }
+    T1->next=NULL;
+  return H;
+}
