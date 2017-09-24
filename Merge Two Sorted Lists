@@ -1,0 +1,70 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ * 
+ * typedef struct ListNode listnode;
+ * 
+ * listnode* listnode_new(int val) {
+ *     listnode* node = (listnode *) malloc(sizeof(listnode));
+ *     node->val = val;
+ *     node->next = NULL;
+ *     return node;
+ * }
+ */
+/**
+ * @input A : Head pointer of linked list 
+ * @input B : Head pointer of linked list 
+ * 
+ * @Output head pointer of list.
+ */
+listnode* mergeTwoLists(listnode* headA, listnode* headB) {
+
+    // This is a "method-only" submission. 
+    // You only need to complete this method
+    if(headA == NULL) return headB;
+    if(headB == NULL) return headA;
+    
+    listnode *mergedHead = NULL;
+    listnode* current = NULL;
+    
+    while(headA != NULL && headB != NULL)
+    {
+        if(headA->val <= headB->val) {
+            if(mergedHead == NULL) {
+                mergedHead = headA;
+                current = headA;
+            }
+            else {
+                current->next = headA;
+                current = current->next;
+            }
+            headA = headA->next;
+        }
+        else {
+            if(mergedHead == NULL) {
+                mergedHead = headB;
+                current = headB;
+            }
+            else {
+                current->next = headB;
+                current = current->next;
+            }
+            headB = headB->next;
+        }
+    }
+    
+    if(headA != NULL)
+        current->next = headA;
+    
+    if(headB != NULL)
+        current->next = headB;
+    
+    return mergedHead;
+    
+}
+
+
+
