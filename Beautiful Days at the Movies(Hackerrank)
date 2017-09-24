@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    int up, down , div, rev=0, rem=0;
+    int i, j=0;
+    scanf("%d%d%d",&up, &down, &div);
+    for(i=up;i<=down;i++)
+    { int temp = i;
+     int temp2 = i;
+        while (temp2 != 0)
+        {
+            rem = temp2 % 10;
+            rev = rev * 10 + rem;
+            temp2=temp2/10;
+        }
+     //printf("temp %d  rev %d  \n",temp,rev);
+     double fn = abs(temp-rev);
+            fn = fn/div;
+         int x = (int)fn;
+     //printf("fn %f  x %d \n ",fn,x);
+     if(fn-x == 0)
+         j++;
+     rev=0;
+     rem=0;
+    }
+    printf("%d",j);
+       
+    
+    
+    return 0;
+}
