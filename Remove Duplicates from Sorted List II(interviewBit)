@@ -1,0 +1,29 @@
+listnode* deleteDuplicates(listnode* A) {
+    listnode *dummyhead=(listnode*)malloc(sizeof(listnode));
+    dummyhead->val=0;
+    dummyhead->next=A;
+    listnode *prev=dummyhead;
+    listnode *head=A;
+    while(A!=NULL)
+    {
+         if(A->next!=NULL && A->next->val==A->val)
+         {
+             while(A->next!=NULL && A->next->val==A->val)
+             {
+                 listnode *temp=A->next;
+                 A->next=temp->next;
+                 free(temp);
+             }
+             listnode *r=A;
+             prev->next=r->next;
+             A=A->next;
+             free(r);
+         }
+         else
+         {
+             prev=A;
+             A=A->next;
+         }
+    }
+    return dummyhead->next;
+}
