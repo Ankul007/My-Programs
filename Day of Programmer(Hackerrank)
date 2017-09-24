@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+string solve(int year){
+  int x,y;
+        string q,w;
+        
+        if(year==2100 || year==2300||year==2500||year==2600||year==2700||year==2200)
+        return ("13.09.");
+        else if(year==1918)
+        return ("26.09.");
+           else if (year%4==0 || year%400==0)
+               return ("12.09.") ;
+        
+        
+           else if(year%4==0 || year%100!=0) 
+               return ("13.09.");
+               
+        return 0;
+}
+
+int main() {
+    int year;
+    cin >> year;
+    string result = solve(year);
+    cout << result<<year<< endl;
+    return 0;
+}
