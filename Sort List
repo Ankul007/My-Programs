@@ -1,0 +1,83 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ * 
+ * typedef struct ListNode listnode;
+ * 
+ * listnode* listnode_new(int val) {
+ *     listnode* node = (listnode *) malloc(sizeof(listnode));
+ *     node->val = val;
+ *     node->next = NULL;
+ *     return node;
+ * }
+ */
+/**
+ * @input A : Head pointer of linked list 
+ * 
+ * @Output head pointer of list.
+ */
+ listnode* merge(listnode* head, int n)
+ {
+     if(n <= 2) {
+        if(head->next != NULL && head->val > head->next->val) {
+            int temp = head->val;
+            head->val = head->next->val;
+            head->next->val = temp;
+        }
+        return head;
+            
+     }
+     listnode *nhead=head, *prev, *temp1, *temp2;
+     int i;
+     for(i=0;i<(n-1)/2;i++)
+        nhead = nhead->next;
+    prev = nhead;
+    nhead = nhead->next;
+    prev->next = NULL;
+    temp1 = merge(head, (n + 1)/2);
+    temp2 = merge(nhead, (n)/2);
+    if(temp1->val < temp2->val) {
+        nhead = temp1;
+        temp1 = temp1->next;
+    }
+    else {
+        nhead = temp2;
+        temp2 = temp2->next;
+    }
+    // nhead = listnode_new(0);
+    prev = nhead;
+    while(temp1 != NULL && temp2 != NULL)
+    {
+        if(temp1->val < temp2->val) {
+            nhead->next = temp1;
+            temp1 = temp1->next;
+            nhead = nhead->next;
+        }
+        else {
+            nhead->next = temp2;
+            temp2 = temp2->next;
+            nhead = nhead->next;
+        }
+    }
+    if(temp1 == NULL)
+        nhead->next = temp2;
+    else
+        nhead->next = temp1;
+    nhead = prev;
+    return nhead;
+ }
+ 
+listnode* sortList(listnode* A) {
+    int len=0;
+    listnode* head = A;
+    while(head != NULL) {
+        len++;
+        head = head->next;
+    }
+    if(len == 1)
+        return A;
+    return merge(A, len);
+}
