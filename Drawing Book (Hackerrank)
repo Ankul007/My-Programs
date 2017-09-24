@@ -1,0 +1,36 @@
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <limits.h>
+#include <stdbool.h>
+
+int solve(int n, int p){
+    int z=0;
+    int m=n/2;
+    if (p==1||p==n)
+        return z;
+    if(p<=m)
+    {
+        z=p/2;
+    }
+    else if (p>m) 
+    {  
+        p=p/2;
+     
+        z = p-m; 
+    }
+    
+    return abs(z);
+}
+
+int main() {
+    int n; 
+    scanf("%d", &n);
+    int p; 
+    scanf("%d", &p);
+    int result = solve(n, p);
+    printf("%d\n", result);
+    return 0;
+}
