@@ -1,0 +1,22 @@
+int braces(char* A) {
+    int len=strlen(A),i=0,stack[len],top=-1;
+    for(i=0;i<len;i++)
+    {
+        if(A[i]=='('||A[i]=='+'||A[i]=='-'||A[i]=='*'||A[i]=='/')
+        stack[++top]=A[i];
+        else if(A[i]==')')
+        {
+            if(stack[top]=='(')
+            return 1;
+            else
+            {
+                while(top>=0 && stack[top]!='(')        
+                top--;
+                top--;
+            }
+        }
+    }
+    return 0;
+    
+}
+
