@@ -1,0 +1,54 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	int i=0,len=0;
+	char res[100];
+	int j=0;
+    char str[100],arr[]="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+	/*gets(str);*/  scanf(" %[^\n]s", str); 
+	len=strlen(str);
+	while(str[i]!='\0') {    
+	    if(i<len) {
+		    res[j] = arr[ (( str[i] >>2 ))];
+		    j++;
+     	}
+     	else {
+			res[j] = '=';
+		 j++; 
+	    }
+     	
+	     
+		if(i<len){
+		    res[j] = arr[ ((( str[i] & 3) <<6 ) + (( str[++i] & 240) >>2))>>2 ];
+			j++;
+		}
+		else {
+			res[j] = '=';
+		 j++; 
+	    }
+		
+		if(i<len) {
+		 	res[j] = arr[ ((( str[i] & 15 )<<4) + (( str[++i] & 192 )>>4))>>2];
+			j++;
+		}
+		else {
+			res[j] = '=';
+		 j++; 
+	    }
+		
+        
+		 if(i<len) {
+		 res[j] = arr[ (str[i] & 63)];
+		 j++;
+		 }
+		 else {
+			res[j] = '=';
+		 j++; 
+	    }
+		 i++;
+		 }
+		 
+  		res[j]='\0';
+  		puts(res);
+    }
