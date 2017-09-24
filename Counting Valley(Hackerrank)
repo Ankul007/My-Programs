@@ -1,0 +1,36 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+   int size, down = 0, up = 0, downhill = 0, i;
+
+scanf("%d", &size);
+
+char str[size];
+
+scanf("%s", str);
+
+for(i = 0; str[i] != '\0'; i++)
+{
+if(str[i] == 'U')
+down += 1;
+else
+down -= 1;
+if(down < 0 && up == 0)
+{
+up = 1;
+downhill++;
+}
+
+if(down >= 0)
+up = 0;
+}
+
+printf("%d", downhill);
+return 0;
+}
